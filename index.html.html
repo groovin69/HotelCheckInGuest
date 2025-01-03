@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Willkommen im Hotel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #007BFF;
+        }
+        .nfc-card {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+        ul {
+            padding-left: 20px;
+        }
+    </style>
+    <script>
+        // Funktion zur Generierung einer zufälligen Zimmernummer
+        function generateRoomNumber() {
+            const floor = Math.floor(Math.random() * 5) + 1; // Stockwerk (1 bis 5)
+            const room = Math.floor(Math.random() * 20) + 1; // Zimmernummer (1 bis 20)
+            return { floor, room };
+        }
+
+        // Funktion zum Aktualisieren der Seite mit der Zimmernummer und Wegbeschreibung
+        function updateRoomDetails() {
+            const roomDetails = generateRoomNumber();
+            const roomNumber = `Zimmer: ${roomDetails.floor}0${roomDetails.room}`;
+            const roomDescription = `Gehen Sie von der Lobby aus geradeaus zum Aufzug, fahren Sie in die ${roomDetails.floor}. Etage, und folgen Sie der Beschilderung zu Zimmer ${roomDetails.floor}0${roomDetails.room}.`;
+
+            document.getElementById("room-number").textContent = roomNumber;
+            document.getElementById("room-description").textContent = roomDescription;
+        }
+
+        // Seite initialisieren
+        window.onload = updateRoomDetails;
+    </script>
+</head>
+<body>
+    <h1>Willkommen im Hotel!</h1>
+    <p>Lieber Gast, wir freuen uns, Sie bei uns begrüßen zu dürfen.</p>
+    <div class="nfc-card">
+        <h2>Zugang mit NFC-Tag</h2>
+        <p>Ihr NFC-Tag wurde erfolgreich erkannt. Sie haben Zugang zu:</p>
+        <h3 id="room-number">Zimmer: ...</h3>
+        <p id="room-description"><em>Wegbeschreibung wird geladen...</em></p>
+    </div>
+    <div class="nfc-card">
+        <h2>Über unser Hotel</h2>
+        <p>Unser Hotel bietet Ihnen eine Oase der Ruhe mit modernem Komfort. Genießen Sie unseren Wellnessbereich, ein erstklassiges Restaurant und gemütliche Zimmer.</p>
+        <h3>Empfehlungen für Aktivitäten:</h3>
+        <ul>
+            <li>Entspannen Sie in unserem Spa mit Sauna und Pool.</li>
+            <li>Probieren Sie unser Gourmet-Menü im Hotelrestaurant.</li>
+            <li>Erkunden Sie die Umgebung mit einer geführten Wanderung oder Fahrradtour.</li>
+            <li>Besuchen Sie die nahegelegene Altstadt mit historischen Sehenswürdigkeiten.</li>
+        </ul>
+    </div>
+</body>
+</html>
