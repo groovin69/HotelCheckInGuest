@@ -30,11 +30,11 @@
         }
     </style>
     <script>
-        // Funktion zur Generierung einer zufälligen Zimmernummer (max. 3-stellig)
+        // Funktion zur Generierung einer 3-stelligen Zimmernummer
         function generateRoomNumber() {
             const floor = Math.floor(Math.random() * 5) + 1; // Stockwerk (1 bis 5)
-            const room = Math.floor(Math.random() * 20) + 1; // Zimmernummer im Stockwerk (1 bis 20)
-            const roomNumber = `${floor}${room < 10 ? "0" : ""}${room}`; // Immer 3-stellig
+            const room = Math.floor(Math.random() * 10); // Zimmernummer innerhalb des Stockwerks (0 bis 9)
+            const roomNumber = `${floor}${room}${Math.floor(Math.random() * 10)}`; // Genau 3-stellig
             return { floor, roomNumber };
         }
 
