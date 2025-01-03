@@ -18,7 +18,17 @@
         }
         h1 {
             color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-size: 36px;
+            font-family: 'Georgia', serif;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px;
+        }
+        .welcome-text {
+            color: #fffae6;
+            font-size: 18px;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 30px;
         }
         .nfc-card {
             background-color: rgba(255, 255, 255, 0.9); /* Halbtransparenter Hintergrund */
@@ -80,7 +90,7 @@
 </head>
 <body>
     <h1>Willkommen im Hotel!</h1>
-    <p style="color: #ffffff; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">Lieber Gast, wir freuen uns, Sie bei uns begrüßen zu dürfen.</p>
+    <p class="welcome-text">Lieber Gast, wir freuen uns, Sie bei uns begrüßen zu dürfen.</p>
     
     <!-- Erster Kasten: NFC-Tag und Kundeninformationen -->
     <div class="nfc-card">
@@ -96,7 +106,7 @@
         <h2>Ihr Zimmer</h2>
         <h3 id="room-number">Zimmer: ...</h3>
         <p id="room-description"><em>Wegbeschreibung wird geladen...</em></p>
-        <p><strong>Hinweis:</strong> Ihr NFC-Tag dient als Zimmerschlüssel.</p>
+        <p><strong>Hinweis:</strong> Ihr NFC-Tag dient auch als Zimmerschlüssel.</p>
     </div>
     
     <!-- Vorletzter Kasten: Über unser Hotel -->
