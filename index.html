@@ -30,18 +30,19 @@
         }
     </style>
     <script>
-        // Funktion zur Generierung einer zufälligen Zimmernummer
+        // Funktion zur Generierung einer zufälligen Zimmernummer (max. 3-stellig)
         function generateRoomNumber() {
             const floor = Math.floor(Math.random() * 5) + 1; // Stockwerk (1 bis 5)
-            const room = Math.floor(Math.random() * 20) + 1; // Zimmernummer (1 bis 20)
-            return { floor, room };
+            const room = Math.floor(Math.random() * 20) + 1; // Zimmernummer im Stockwerk (1 bis 20)
+            const roomNumber = `${floor}${room < 10 ? "0" : ""}${room}`; // Immer 3-stellig
+            return { floor, roomNumber };
         }
 
         // Funktion zum Aktualisieren der Seite mit der Zimmernummer und Wegbeschreibung
         function updateRoomDetails() {
             const roomDetails = generateRoomNumber();
-            const roomNumber = `Zimmer: ${roomDetails.floor}0${roomDetails.room}`;
-            const roomDescription = `Gehen Sie von der Lobby aus geradeaus zum Aufzug, fahren Sie in die ${roomDetails.floor}. Etage, und folgen Sie der Beschilderung zu Zimmer ${roomDetails.floor}0${roomDetails.room}.`;
+            const roomNumber = `Zimmer: ${roomDetails.roomNumber}`;
+            const roomDescription = `Gehen Sie von der Lobby aus geradeaus zum Aufzug, fahren Sie in die ${roomDetails.floor}. Etage, und folgen Sie der Beschilderung zu Zimmer ${roomDetails.roomNumber}.`;
 
             document.getElementById("room-number").textContent = roomNumber;
             document.getElementById("room-description").textContent = roomDescription;
