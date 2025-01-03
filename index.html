@@ -10,7 +10,7 @@
             text-align: center;
             padding: 20px;
             color: #333;
-            background-image: url('https://media-cdn.holidaycheck.com/w_768,h_432,c_fill,q_auto,f_auto/ugc/images/fc98c615-6fb3-46ec-bbc8-7d64286218d5'); /* Link zum Hintergrundbild */
+            background-image: url('https://media-cdn.tripadvisor.com/media/photo-s/0e/7c/5d/38/hotel-spa-vilamont.jpg'); /* Link zum Hintergrundbild */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -33,9 +33,12 @@
         ul {
             padding-left: 20px;
         }
+        .nfc-success {
+            font-weight: bold;
+            font-size: 17px; /* 1px größer */
+        }
     </style>
     <script>
-        // Funktion zur Generierung einer 3-stelligen Zimmernummer
         function generateRoomNumber() {
             const floor = Math.floor(Math.random() * 5) + 1; // Stockwerk (1 bis 5)
             const room = Math.floor(Math.random() * 10); // Zimmernummer innerhalb des Stockwerks (0 bis 9)
@@ -43,32 +46,64 @@
             return { floor, roomNumber };
         }
 
-        // Funktion zum Aktualisieren der Seite mit der Zimmernummer und Wegbeschreibung
-        function updateRoomDetails() {
-            const roomDetails = generateRoomNumber();
-            const roomNumber = `Zimmer: ${roomDetails.roomNumber}`;
-            const roomDescription = `Gehen Sie von der Lobby aus geradeaus zum Aufzug, fahren Sie in die ${roomDetails.floor}. Etage, und folgen Sie der Beschilderung zu Zimmer ${roomDetails.roomNumber}.`;
-
-            document.getElementById("room-number").textContent = roomNumber;
-            document.getElementById("room-description").textContent = roomDescription;
+        function generateReservationNumber() {
+            return Math.floor(100000 + Math.random() * 900000); // 6-stellige Nummer
         }
 
-        // Seite initialisieren
-        window.onload = updateRoomDetails;
+        function generateRandomBirthday() {
+            const year = Math.floor(Math.random() * (2003 - 1960 + 1)) + 1960; // Jahr zwischen 1960 und 2003
+            const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0'); // Monat (01-12)
+            const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0'); // Tag (01-28)
+            return `${day}.${month}.${year}`;
+        }
+
+        function generateCustomerName() {
+            const names = ["Max Mustermann", "Erika Musterfrau", "Johann Schmidt", "Lisa Müller", "Markus Becker"];
+            return names[Math.floor(Math.random() * names.length)];
+        }
+
+        function updatePageDetails() {
+            const roomDetails = generateRoomNumber();
+            const reservationNumber = generateReservationNumber();
+            const birthday = generateRandomBirthday();
+            const customerName = generateCustomerName();
+
+            document.getElementById("room-number").textContent = `Zimmer: ${roomDetails.roomNumber}`;
+            document.getElementById("room-description").textContent = `Gehen Sie von der Lobby aus geradeaus zum Aufzug, fahren Sie in die ${roomDetails.floor}. Etage, und folgen Sie der Beschilderung zu Zimmer ${roomDetails.roomNumber}.`;
+            document.getElementById("reservation-number").textContent = `Reservierungsnummer: ${reservationNumber}`;
+            document.getElementById("customer-name").textContent = `Name: ${customerName}`;
+            document.getElementById("customer-birthday").textContent = `Geburtsdatum: ${birthday}`;
+        }
+
+        window.onload = updatePageDetails;
     </script>
 </head>
 <body>
     <h1>Willkommen im Hotel!</h1>
     <p style="color: #ffffff; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">Lieber Gast, wir freuen uns, Sie bei uns begrüßen zu dürfen.</p>
+    
+    <!-- Erster Kasten: NFC-Tag und Kundeninformationen -->
     <div class="nfc-card">
-        <h2>Zugang mit NFC-Tag</h2>
-        <p>Ihr NFC-Tag wurde erfolgreich erkannt. Sie haben Zugang zu:</p>
+        <p class="nfc-success">Ihr NFC-Tag wurde erfolgreich erkannt.</p>
+        <h2>Ihre Informationen</h2>
+        <p id="customer-name">Name: ...</p>
+        <p id="customer-birthday">Geburtsdatum: ...</p>
+        <p id="reservation-number">Reservierungsnummer: ...</p>
+    </div>
+    
+    <!-- Zweiter Kasten: Zimmernummer und Wegbeschreibung -->
+    <div class="nfc-card">
+        <h2>Ihr Zimmer</h2>
         <h3 id="room-number">Zimmer: ...</h3>
         <p id="room-description"><em>Wegbeschreibung wird geladen...</em></p>
+        <p><strong>Hinweis:</strong> Ihr NFC-Tag dient als Zimmerschlüssel.</p>
     </div>
+    
+    <!-- Vorletzter Kasten: Über unser Hotel -->
     <div class="nfc-card">
         <h2>Über unser Hotel</h2>
         <p>Unser Hotel bietet Ihnen eine Oase der Ruhe mit modernem Komfort. Genießen Sie unseren Wellnessbereich, ein erstklassiges Restaurant und gemütliche Zimmer.</p>
+        <p><strong>Gut zu wissen:</strong> Ihr NFC-Tag kann für Extra-Services wie Wellness-Buchungen oder Restaurant-Zahlungen genutzt werden.</p>
         <h3>Empfehlungen für Aktivitäten:</h3>
         <ul>
             <li>Entspannen Sie in unserem Spa mit Sauna und Pool.</li>
@@ -76,6 +111,14 @@
             <li>Erkunden Sie die Umgebung mit einer geführten Wanderung oder Fahrradtour.</li>
             <li>Besuchen Sie die nahegelegene Altstadt mit historischen Sehenswürdigkeiten.</li>
         </ul>
+    </div>
+    
+    <!-- Letzter Kasten: Kontaktdaten -->
+    <div class="nfc-card">
+        <h2>Kontakt für weitere Fragen</h2>
+        <p>Telefon: +49 123 456 789</p>
+        <p>E-Mail: kontakt@hotelbeispiel.de</p>
+        <p>Rezeption: Täglich 24 Stunden geöffnet</p>
     </div>
 </body>
 </html>
